@@ -1,0 +1,31 @@
+{
+  "name": "ems-backend",
+  "version": "1.0.0",
+  "description": "Employee Management System Backend",
+  "homepage": "https://github.com/UjjawalTechnical/ems-backend#readme",
+  "bugs": {
+    "url": "https://github.com/UjjawalTechnical/ems-backend/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/UjjawalTechnical/ems-backend.git"
+  },
+  "license": "Apache-2.0",
+  "author": "Ujjawal Saini",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm start",
+    "start": "nodemon --env-file=.env index.js"
+  },
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "cors": "^2.8.6",
+    "express": "^5.2.1",
+    "jsonwebtoken": "^9.0.3",
+    "mongoose": "^9.8.1",
+    "multer": "^2.2.0",
+    "nodemon": "^3.1.14",
+    "path": "^0.12.7"
+  }
+}
