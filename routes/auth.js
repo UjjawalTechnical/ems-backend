@@ -1,8 +1,10 @@
 import express from "express";
-import { login } from "../controllers/authContoller.js";
+import { login, verify } from "../controllers/authContoller.js";
+import authMiddleware from "../middleware/authMiddleware.js";
 
-const route= express.Router()
+const route = express.Router()
 
-route.post('/login',login)
+route.post('/login', login)
+route.post("/verify", authMiddleware, verify)
 
 export default route;
