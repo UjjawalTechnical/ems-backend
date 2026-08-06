@@ -6,10 +6,30 @@ const getDepartments = async (req, res) => {
         if (!departments || departments.length === 0) {
             return res.status(404).json({ success: false, message: 'No departments found' })
         }
-        return res.status(200).json({ success: true, departments })
+        const pageIndex = parseInt(req.query.page) || 1;
+        const pageSize = parseInt(req.query.limit) || 10;
+        const startIndex = (pageIndex - 1) * pageSize;
+        const endIndex = startIndex + pageSize;
+        const paginatedDepartments = departments.slice(startIndex, endIndex);
+        
+        return res.status(200).json({ success: true, departments: paginatedDepartments })
     } catch (error) {
         console.error('Error fetching departments:', error)
         return res.status(500).json({ success: false, message: 'Internal server error' })
+    }
+}
+
+const getDepartmentById = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const department = await Department.findById(id);
+        if (!department) {
+            return res.status(404).json({ success: false, message: 'Department not found' });
+        }
+        return res.status(200).json({ success: true, department });
+    } catch (error) {
+        console.error('Error fetching department:', error);
+        return res.status(500).json({ success: false, message: 'Internal server error' });
     }
 }
 
@@ -63,4 +83,4 @@ const deleteDepartment = async (req, res) => {
     }
 }
 
-export { addDepartment, getDepartments, updateDepartment, deleteDepartment }
+export { addDepartment, getDepartments, getDepartmentById, updateDepartment, deleteDepartment }
